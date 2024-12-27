@@ -1,6 +1,8 @@
 package me.devrax.moodLog.controller;
 
 import me.devrax.moodLog.entity.JournalEntry;
+import me.devrax.moodLog.service.JournalEntryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -39,6 +41,9 @@ public class JournalEntryController {
 //        return journalEntries.put(myId, myEntry);
 //    }
 
+    @Autowired
+    private JournalEntryService journalEntryService;
+
     @GetMapping
     public List<JournalEntry> getAll() {
         return null;
@@ -46,7 +51,8 @@ public class JournalEntryController {
 
     @PostMapping
     public boolean createEntry(@RequestBody JournalEntry myEntry) {
-        return false;
+        journalEntryService.saveEntry(myEntry);
+        return true;
     }
 
     @GetMapping("id/{myId}")
